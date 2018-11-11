@@ -1,0 +1,19 @@
+.main-title {
+    text-transform: uppercase;
+    color: #333;
+    text-align: center;
+    font-size: 60px;
+    margin-top: 60px;
+    @include media-breakpoint-down(lg) {
+      font-size: 50px;
+    }
+    @include media-breakpoint-down(md) {
+      font-size: 45px;
+    }
+    @include media-breakpoint-down(sm) {
+      font-size: 38px;
+    }
+    @include media-breakpoint-down(xs) {
+      font-size: 30px;
+    }
+}

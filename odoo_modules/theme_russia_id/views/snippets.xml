@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <template id="call_to_action" name="Call to Action russia-id">
+      <section class="call-to-action" data-drop-in="oe-structure">
+        <div class="container">
+          <h2 class="call-to-action__title">Хотите расширить свой бизнес на Россию?</h2>
+          <a href="#" class="call-to-action__button">Help request</a>
+        </div>
+      </section>
+    </template>
+    
+    <template id="header_home" name="Header home russia-id">
+      <section class="call-to-action" data-drop-in="oe-structure">
+        <div class="container">
+          <h2 class="call-to-action__title">Хотите расширить свой бизнес на Россию?</h2>
+          <a href="#" class="call-to-action__button">Help request</a>
+        </div>
+      </section>
+    </template>
+    
+    <template id="place_into_bar" inherit_id="website.snippets" name="Place into bar">
+      <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+        <t t-snippet="russia_id.call_to_action" t-thumbnail="/russia_id/static/src/img/ui/call_to_action.png"/>
+      </xpath>
+    </template>
+    
+   <template id="call_to_action_opt" name="Call to Action Options" inherit_id="website.snippet_options">
+    <xpath expr="//div[@data-js='background']" position="after">
+      <div data-selector=".call-to-action"> <!-- Options group -->
+        <div class="dropdown-submenu">
+          <a tabindex="-2" href="#" class="dropdown-item"><i class="fa fa-font"/>Call to Action Option</a>
+          <div class="dropdown-menu" role="menu">
+            <a href="#" class="dropdown-item" data-toggle-class="call-to-action_border-bottom">With border bottom</a>
+          </div>
+        </div>
+      </div>
+    </xpath>
+   </template>
+    
+    
+  </data>
+</odoo>

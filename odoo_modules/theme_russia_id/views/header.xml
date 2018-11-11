@@ -1,0 +1,114 @@
+<odoo>
+    <data>
+        <template id="header" inherit_id="website.layout" name="Russia-id Header">
+
+          <xpath expr="//div[@id='wrapwrap']//header" position="replace">
+            <header class="header">
+                <div class="header__top">
+                    <div class="container">
+                        <t t-call="theme_russia_id.top_panel"/>
+                    </div>
+                </div>
+                <div class="header__middle">
+                    <div class="container">
+                      <div class="logo">
+                        <a href="/" class="logo__main">Россия <small>в деталях</small></a>
+                        <div class="logo__slogan">команда консультантов</div>
+                      </div>
+                      <button 
+                        class="main-menu-toggle collapsed" 
+                        type="button"
+                        data-toggle="collapse" 
+                        data-target="#main-menu" 
+                        aria-expanded="false" 
+                        aria-controls="main-menu">
+                        <i class="fa fa-ellipsis-v fa-2x fa_open"/>
+                        <i class="fa fa-times fa-2x fa_close"/>
+                      </button>
+                      <nav class="main-menu collapse" id="main-menu">
+                        <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                          <a t-att-href="submenu.clean_url()"
+                            t-attf-class="main-menu__item #{'main-menu__item_active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}"
+                            role="menuitem"
+                            t-ignore="true"
+                            t-att-target="'_blank' if submenu.new_window else None" t-field="submenu.name" />
+                        </t>
+                      </nav>
+                    </div>
+                </div>
+                <div class="header__bottom">
+                    <div class="container"></div>
+                </div>
+            </header>
+          </xpath>
+        </template>
+        
+        <template id="top_panel">
+            <div class="top-panel">
+                <div class="top-panel__item">
+                    <a t-attf-href="mailto:{{ res_company.email }}" class="top-panel__link">
+                        <i class="fa fa-envelope"/> <span t-field="res_company.email"/>
+                    </a>
+                </div>
+                <div class="top-panel__item">
+                    <a t-attf-href="tel:{{ res_company.phone }}" class="top-panel__link">
+                        <i class="fa fa-phone"/> <span t-field="res_company.phone"/>
+                    </a>
+                </div>
+                <div class="top-panel__item dropdown js_language_selector">
+                    <a href="#" 
+                      class="top-panel__link top-panel__link_language dropdown-toggle" 
+                      id="dropdown-language" 
+                      t-esc="list(filter(lambda lg : lg[0] == lang, languages))[0][0][:2]" 
+                      data-toggle="dropdown" 
+                      aria-haspopup="true" 
+                      aria-expanded="false"/>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-language">
+                       <t t-foreach="languages" t-as="lg">
+                          <a t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang=lg[0])" class="dropdown-item js_change_lang" t-att-data-default-lang="(editable or translatable) and 'true' if website and lg[0] == website.default_lang_code else None" t-att-data-lang="lg[0]">
+                              <t t-esc="lg[1].split('/').pop()"/>
+                          </a>
+                      </t>
+                      <t groups="website.group_website_publisher">
+                        <div class="dropdown-divider"/>
+                        <t t-set="url_return" t-value="url_for('', '[lang]') + '?' + keep_query()"/>
+                        <a class="dropdown-item" t-attf-href="/web#action=base.action_view_base_language_install&amp;website_id=#{website.id if website else ''}&amp;url_return=#{url_return}">
+                            <i class="fa fa-plus-circle"/>
+                            Add a language...
+                        </a>
+                      </t>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+        <template id="submenu" name="Submenu">
+            <t t-set="has_visible_submenu" t-value="submenu.child_id.filtered(lambda menu: menu.is_visible)"/>
+            <li t-if="submenu.is_visible and not has_visible_submenu" t-attf-class="#{item_class or ''}">
+              <a t-att-href="submenu.clean_url()"
+                t-attf-class="#{link_class or ''} #{'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}"
+                role="menuitem"
+                t-ignore="true"
+                t-att-target="'_blank' if submenu.new_window else None">
+                <span t-field="submenu.name"/>
+              </a>
+            </li>
+            <li t-if="has_visible_submenu" t-attf-class="#{item_class or ''} dropdown #{
+              (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or
+               (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+              }">
+              <a t-attf-class="#{link_class or ''} dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span t-field="submenu.name"/>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <t t-foreach="submenu.child_id" t-as="submenu">
+                  <t t-call="website.submenu">
+                    <t t-set="item_class" t-value="None"/>
+                    <t t-set="link_class" t-value="'dropdown-item'"/>
+                  </t>
+                </t>
+              </ul>
+            </li>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+    <template id="index">
+      <t t-call="website.layout">
+        <div class="oe_structure">
+          <section class="main-header parallax s_parallax_is_fixed oe_img_bg bg-white-50 pt136 pb96" data-scroll-background-ratio="1">
+            <span class="s_parallax_bg" style="background-image: url('/services/static/src/images/services-bg.jpg'); background-position: 50% 50%;"/>
+            <div class="container">
+              <h1 class="main-title">Наши возможности</h1>
+            </div>
+          </section>
+        </div>
+        <div class="oe_structure">
+          <div class="container">
+            <t t-foreach="categories" t-as="category">
+              <p><a t-attf-href="/services/{{ category.alias }}/" t-field="category.name"></a></p>
+            </t>
+          </div>
+        </div>
+        <div class="oe_structure"/>
+      </t>
+    </template>
+    
+    <template id="category">
+      <t t-call="website.layout">
+        <div class="oe_structure">
+          <section class="main-header parallax s_parallax_is_fixed oe_img_bg bg-white-50 pt136 pb96" data-scroll-background-ratio="1">
+            <span class="s_parallax_bg" style="background-image: url('/services/static/src/images/services-bg.jpg'); background-position: 50% 50%;"/>
+            <div class="container">
+              <h1 class="main-title" t-field="category.name" />
+            </div>
+          </section>
+        </div>
+        
+        <div class="oe_structure">
+          <div t-field="category.content"/>
+        </div>
+      </t>
+    </template>
+    
+
+    
+  </data>
+</odoo>

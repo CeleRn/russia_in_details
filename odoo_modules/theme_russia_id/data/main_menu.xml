@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="website_menu_team" model="website.menu">
+            <field name="name">Наша команда</field>
+            <field name="url">/team</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">11</field>
+        </record>
+        <record id="website_menu_faq" model="website.menu">
+            <field name="name">Вопросы и ответы</field>
+            <field name="url">/faq</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">30</field>
+        </record>
+        <record id="website_menu_prices" model="website.menu">
+            <field name="name">Цены</field>
+            <field name="url">/prices</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">35</field>
+        </record>
+        <record id="website_menu_contacts" model="website.menu">
+            <field name="name">Контакты</field>
+            <field name="url">/contacts</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">50</field>
+        </record>
+    </data>
+</odoo>

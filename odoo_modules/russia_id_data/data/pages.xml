@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <!-- Team page -->
+        <record id="teampage" model="ir.ui.view">
+            <field name="name">Команда</field>
+            <field name="type">qweb</field>
+            <field name="key">website.teampage</field>
+            <field name="arch" type="xml">
+                <t name="Team" priority="29" t-name="russia_id_data.teampage">
+                    <t t-call="website.layout">
+                        <t t-set="pageName" t-value="'teampage'"/>
+                        <div id="wrap" class="oe_structure">
+                            <section class="s_cover parallax oe_img_bg oe_custom_bg s_parallax_is_fixed pt160 bg-white-50 pb96" data-scroll-background-ratio="1" style="background-image: none;">
+                            <span class="s_parallax_bg oe_img_bg oe_custom_bg" style="background-image: url('/russia_id_data/static/src/images/team_bg.jpg'); background-position: 50% 0px;"></span>
+                            <div class="container">
+                              <h1 class="main-title">Наша команда</h1>
+                            </div>
+                          </section>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+        <record id="teampage_page" model="website.page">
+            <field name="website_published">True</field>
+            <field name="url">/team</field>
+            <field name="view_id" ref="russia_id_data.teampage"/>
+        </record>
+        
+        
+    </data>
+</odoo>

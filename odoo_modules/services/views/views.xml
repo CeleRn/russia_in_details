@@ -1,0 +1,29 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="services.category_list">
+      <field name="name">Services categories</field>
+      <field name="model">services.categories</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+    
+    <menuitem id="services_root" 
+      name="Services" 
+      sequence="10" 
+      parent="website.menu_website_configuration"
+      groups="website.group_website_designer"/>    
+    
+    <record model="ir.actions.act_window" id="action_list_services_categories">
+      <field name="name">Services categories</field>
+      <field name="res_model">services.categories</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    
+    <menuitem name="Categories" id="services.menu_categories" parent="services.services_root" action="action_list_services_categories"/>
+
+  </data>
+</odoo>
